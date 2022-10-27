@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # https://medium.com/geekculture/web-scraping-tables-in-python-using-beautiful-soup-8bbc31c5803e
 
 from bs4 import BeautifulSoup
