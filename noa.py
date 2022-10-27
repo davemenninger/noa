@@ -3,10 +3,14 @@
 # https://medium.com/geekculture/web-scraping-tables-in-python-using-beautiful-soup-8bbc31c5803e
 
 from bs4 import BeautifulSoup
+from pyfiglet import Figlet
 import json
 import pandas as pd
 import pickle
 import requests
+
+f = Figlet(font='starwars')
+print(f.renderText('Noa'))
 
 pd.set_option('display.max_colwidth', 100)
 

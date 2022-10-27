@@ -5,6 +5,7 @@ A tool to scrape data from the [**Timeline of canon media**](https://starwars.fa
 ## Usage
 
 ```sh
+pip install -r requirements.txt
 python noa.py
 ```
 
