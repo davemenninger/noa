@@ -1,75 +1,61 @@
 #!/usr/bin/env python
 
-# https://medium.com/geekculture/web-scraping-tables-in-python-using-beautiful-soup-8bbc31c5803e
-
-from bs4 import BeautifulSoup
 from pyfiglet import Figlet
-import json
-import pandas as pd
-import pickle
+from sqlite_utils import Database
+import briqualon
+import cmd, sys
 import requests
 
-f = Figlet(font='starwars')
-print(f.renderText('Noa'))
+print("starting...")
 
-pd.set_option('display.max_colwidth', 100)
+# TODO: args:
+# --help
+# --db whatever.db
+# --df my_datafile.json
+# --pickle my_soup.pkl
 
-base_url = "https://starwars.fandom.com"
-url = base_url + "/wiki/Timeline_of_canon_media"
+db = Database("my_timeline.db")
 
-# TODO: cli options to refresh data
-if 1:
-    print("reading from datafile")
-    with open('datafile.json', 'r') as f:
-        data = json.load(f)
+class Noa(cmd.Cmd):
+    def __init__(self, something=[]):
+        cmd.Cmd.__init__(self)
+        self.pick = ""
+        self.prompt = '>>> '
+        self.dataframe = briqualon.init_dataframe()
+        figlet = Figlet(font='starwars')
+        print(figlet.renderText('Noa'))
+        print("My friend Salak and I… we were a couple of young fellas out to tear up the galaxy! Ha. On our first mission, we crashed… here. I've been here ever since. I don't even know how long I've been here.")
+        print("type 'help'")
 
-else:
-    print("fetching from network")
-    data = requests.get(url).text
-    with open( "datafile.json" , "w" ) as write:
-        json.dump( data , write )
+    # TODO: re-fresh data from the internet
+    # TODO: drop db
 
-# Creating BeautifulSoup object
-if 1:
-    print("reading from soupfile")
-    with open('soup.pkl', 'rb') as f:
-        str_soup = pickle.load(f)
-        soup = BeautifulSoup(str_soup, 'html.parser')
+    def do_random_pick(self, arg):
+        pick = briqualon.pick(self.dataframe)
+        # TODO: check if this pick has been seen
+        print(pick)
+        print(pick['Link'].values[0])
+        self.pick = pick
+        title = pick['Title'].values[0]
+        self.prompt = '(' + title + ') >>> '
 
-else:
-    print("re-parsing soup")
-    soup = BeautifulSoup(data, 'html.parser')
-    with open( "soup.pkl" , "wb" ) as write:
-        pickle.dump(str(soup), write)
+    def do_seen_it(self, arg):
+        pick = self.pick
+        title = pick['Title'].values[0]
+        link = pick['Link'].values[0]
+        db["watches"].insert_all([{"title": title, "link": link, "watched": True}])
+        self.do_random_pick(arg)
 
-# Creating list with all tables
-tables = soup.find_all('table')
+    def do_list_seen(self, arg):
+        for row in db["watches"].rows:
+            print(row)
 
-# Looking for the table with the classes 'wikitable' and 'sortable'
-table = soup.find('table', class_='wikitable sortable headerbackground')
+    def do_quit(self, arg):
+        sys.exit(0)
 
-# init dataframe
-df = pd.DataFrame(columns=['Date', 'Type', 'Title', 'Link', 'Writer', 'Released'])
+    def do_print_stuff(self, arg):
+        for s in self.stufflist:
+            print(s)
 
-# Collecting Ddata
-for row in table.tbody.find_all('tr'):
-    # Find all data for each column
-    columns = row.find_all('td')
-
-    if(columns != []):
-        date = columns[0].text.strip()
-        media_type = columns[1].text.strip()
-        title = columns[2].text.strip()
-        writer = columns[3].text.strip()
-        released = columns[4].text.strip()
-        link = "."
-        if columns[2].a:
-            link = base_url + columns[2].a.get('href')
-
-        row_df = pd.DataFrame(data={'Date': date,  'Type': media_type, 'Title': title, 'Link': link, 'Writer': writer, 'Released': released}, index=[2, 3])
-        df = pd.concat([df, row_df])
-
-# show a random item
-pick = df.sample(n=1)
-print(pick)
-print(pick['Link'])
+if __name__ == '__main__':
+    Noa().cmdloop()
