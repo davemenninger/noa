@@ -1,6 +1,7 @@
 # https://medium.com/geekculture/web-scraping-tables-in-python-using-beautiful-soup-8bbc31c5803e
 
 from bs4 import BeautifulSoup
+from datetime import datetime
 import json
 import pandas as pd
 import pickle
@@ -11,6 +12,9 @@ pd.set_option('display.max_colwidth', 100)
 def pick(dataframe):
     # show a random item
     return dataframe.sample(n=1)
+
+def search_by(dataframe, field, value):
+    return dataframe[dataframe[field].str.contains(value)]
 
 def init_dataframe():
     base_url = "https://starwars.fandom.com"
@@ -60,16 +64,21 @@ def init_dataframe():
             title = columns[2].text.strip()
             writer = columns[3].text.strip()
             released = columns[4].text.strip()
+            released_dt = None
+            try:
+                released_dt = datetime.fromisoformat(released)
+            except:
+                pass
             link = "."
             if columns[2].a:
                 link = base_url + columns[2].a.get('href')
 
-            row_df = pd.DataFrame(data={'Date': date,  'Type': media_type, 'Title': title, 'Link': link, 'Writer': writer, 'Released': released}, index=[2, 3])
+            row_df = pd.DataFrame(data={'Date': date,  'Type': media_type, 'Title': title, 'Link': link, 'Writer': writer, 'Released': released_dt}, index=[2, 3])
             df = pd.concat([df, row_df])
 
     df['Title'] = df['Title'].astype('string')
     df['Link'] = df['Link'].astype('string')
     df['Writer'] = df['Writer'].astype('string')
-    # print(df.info())
+    df['Type'] = df['Type'].astype('string')
 
     return df

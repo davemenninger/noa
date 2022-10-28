@@ -34,6 +34,8 @@ class Noa(cmd.Cmd):
     # TODO: re-fresh data from the internet
     # TODO: drop db
     # TODO: "more" command fetches summary from the page
+    # TODO: search by fields
+    # TODO: stats
 
     def do_random_pick(self, arg):
         pick = briqualon.pick(self.dataframe)
@@ -53,6 +55,16 @@ class Noa(cmd.Cmd):
         print()
         self.do_random_pick(arg)
 
+    def do_bby(self, arg):
+        result = briqualon.search_by(self.dataframe, 'Date', arg + " BBY")
+        print(result)
+
+    def do_aby(self, arg):
+        result = briqualon.search_by(self.dataframe, 'Date', arg + " ABY")
+        print(result)
+
+    def do_df_info(self, arg):
+        print(self.dataframe.info())
 
     def do_seen_it(self, arg):
         pick = self.pick
@@ -65,6 +77,7 @@ class Noa(cmd.Cmd):
         self.do_random_pick(arg)
 
     def do_list_seen(self, arg):
+        self.pick = None
         for row in db["watches"].rows:
             print(row)
         self.prompt = '>>> '
