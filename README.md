@@ -1,6 +1,9 @@
 # noa
 
-A tool to scrape data from the [**Timeline of canon media**](https://starwars.fandom.com/wiki/Timeline_of_canon_media) page on Wookieepedia.
+A tool to keep track of one's personal canon media progress.
+
+* Scrapes data from the [**Timeline of canon media**](https://starwars.fandom.com/wiki/Timeline_of_canon_media) page on Wookieepedia.
+* Stores "watched" media in a local db.
 
 ## Usage
 
@@ -12,7 +15,7 @@ python noa.py
 ## Features
 
 * Show a random entry from the list of media
-* TODO: mark media as watched/read
+* mark media as watched/read
 
 ## License
 
