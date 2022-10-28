@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import json
 import pandas as pd
 import pickle
+import requests
 
 pd.set_option('display.max_colwidth', 100)
 
