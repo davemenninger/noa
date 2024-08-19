@@ -1,0 +1,9 @@
+x-work {
+}
+
+x-work div[class=work] {
+  background: #ddf;
+  border: 1px dashed black;
+  margin: 1em;
+  padding: 1em;
+}

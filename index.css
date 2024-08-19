@@ -1,0 +1,8 @@
+@import 'reset.css';
+@import 'components/work.css';
+@import 'components/media-icon.css';
+
+body {
+    background: #CCF;
+    font-family: system-ui, sans-serif;
+}
