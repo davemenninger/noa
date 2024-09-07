@@ -37,10 +37,10 @@ class SWDB {
     });
   }
 
-  select_stuff (){
+  select_stuff (dest){
     try {
       this.db.exec({
-        sql: "select * from media limit 15",
+        sql: "select * from media limit 1000",
         rowMode: "object",
         callback: function (row) {
           const w = document.createElement("x-work");
@@ -50,11 +50,34 @@ class SWDB {
           w.setAttribute("released", row.released);
           w.setAttribute("released_dt", row.released_dt);
           w.setAttribute("title", row.title);
-          document.body.append(w);
-        }.bind({ counter: 0 }),
+          dest.append(w);
+        },
       });
     } finally {
-      this.db.close();
+      // TODO: don't
+      // this.db.close();
+    }
+  };
+
+  query (query, dest){
+    try {
+      this.db.exec({
+        sql: query,
+        rowMode: "object",
+        callback: function (row) {
+          const w = document.createElement("x-work");
+          w.setAttribute("date", row.date);
+          w.setAttribute("id", row.id);
+          w.setAttribute("media_type", row.media_type);
+          w.setAttribute("released", row.released);
+          w.setAttribute("released_dt", row.released_dt);
+          w.setAttribute("title", row.title);
+          dest.append(w);
+        },
+      });
+    } finally {
+      // TODO: don't
+      // this.db.close();
     }
   };
 }
