@@ -1,8 +1,15 @@
-@import 'reset.css';
-@import 'components/work.css';
-@import 'components/media-icon.css';
+@import "reset.css";
+@import "colors.css";
+@import "components/work.css";
+@import "components/media-icon.css";
+@import "components/watched-checkbox.css";
+@import "components/swdb.css";
 
 body {
-    background: #CCF;
-    font-family: system-ui, sans-serif;
+  background: var(--color-white);
+  color: var(--color-black);
+  font-family:
+    Gill Sans,
+    sans-serif,
+    system-ui;
 }

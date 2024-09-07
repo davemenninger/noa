@@ -1,9 +1,27 @@
-x-work {
+x-work ul{
+  border: 2px solid purple;
+  display: flex;
+  list-style: none;
+  padding: 0.5em;
+}
+
+x-work li{
+  border: 2px solid blue;
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+x-work li:last-child{
+  border: 2px solid cyan;
+  padding: 0.5em;
+  margin: 0.5em;
+  width: 100%;
 }
 
 x-work div[class=work] {
-  background: #ddf;
-  border: 1px dashed black;
+  background: var(--color-white);
+  border: 1px solid var(--color-black);
+  border-radius: 9px;
   margin: 1em;
   padding: 1em;
 }

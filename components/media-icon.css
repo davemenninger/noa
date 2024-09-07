@@ -1,16 +1,16 @@
 x-media-icon {
-  background: white;
-  border: 1px solid #CCC;
-  border-radius: 3px;
+  background: var(--color-white);
+  border-radius: 9px;
+  border: 1px solid green;
   display: inline-block;
-  margin: 6px;
-  padding: 3px;
+  margin: 9px;
+  padding: 9px;
 }
 
 x-media-icon div.SS{
-  color: green;
+  color: var(--color-light-orange);
 }
 
 x-media-icon div.F{
-  color: gold;
+  color: var(--color-orange);
 }
