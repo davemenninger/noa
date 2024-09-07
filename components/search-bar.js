@@ -11,6 +11,7 @@ class SearchBarComponent extends HTMLElement {
         this.querySelector('form').onsubmit = (e) => {
             e.preventDefault();
             // stuff...
+            console.log(e);
             e.target.reset();
         }
     }
