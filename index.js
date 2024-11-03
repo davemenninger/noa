@@ -19,7 +19,7 @@ import { registerWorkComponent } from "./components/work.js";
 
     try {
       db.initialize().then(() => {
-        db.query("select * from media limit 3", results);
+        db.query("select * from media order by random() limit 9", results);
       });
     } catch (e) {
       console.log(e);
