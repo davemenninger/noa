@@ -22,14 +22,21 @@ class WorkComponent extends HTMLElement {
             const i3 = document.createElement('li');
             i3.append(this.getAttribute('title'));
 
+            const i4 = document.createElement('li');
+            i4.append(this.getAttribute('date'));
+
+            const i5 = document.createElement('li');
+            i5.append(this.getAttribute('released'));
 
             i.appendChild(c);
             u.appendChild(i);
 
             i2.appendChild(s);
-            u.appendChild(i2);
 
+            u.appendChild(i2);
             u.appendChild(i3);
+            u.appendChild(i4);
+            u.appendChild(i5);
 
             d.appendChild(u);
         }
