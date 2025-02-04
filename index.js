@@ -26,6 +26,11 @@ import { registerWorkComponent } from "./components/work.js";
     }
 
     var search_bar = document.getElementById('search');
+    var random_button = document.getElementById('random');
+    random_button.onclick = () => {
+      results.innerHTML = "";
+      db.query("select * from media order by random() limit 9", results);
+    };
   };
 
   document.addEventListener("DOMContentLoaded", app);
