@@ -5,8 +5,6 @@ class WatchedCheckbox extends HTMLElement {
   }
 
   update() {
-    var foo = false;
-
     const request = window.indexedDB.open("mydatabase", 2);
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
@@ -50,6 +48,7 @@ class WatchedCheckbox extends HTMLElement {
   }
 
   mark(_) {
+    // TODO: extract watch history to a component
     const request = window.indexedDB.open("mydatabase", 2);
     request.onupgradeneeded = (event) => {
       const db = event.target.result;

@@ -23,8 +23,6 @@ class SearchBarComponent extends HTMLElement {
       } catch (e) {
         console.log(e);
       }
-      // stuff...
-      //e.target.reset();
     };
   }
 }

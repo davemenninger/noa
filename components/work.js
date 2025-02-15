@@ -34,8 +34,8 @@ class WorkComponent extends HTMLElement {
             i2.appendChild(s);
 
             u.appendChild(i2);
-            u.appendChild(i3);
             u.appendChild(i4);
+            u.appendChild(i3);
             u.appendChild(i5);
 
             d.appendChild(u);

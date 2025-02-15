@@ -5,6 +5,7 @@ import { registerSWDBComponent } from "./components/swdb.js";
 import { registerSearchBarComponent } from "./components/search-bar.js";
 import { registerWatchedCheckboxComponent } from "./components/watched-checkbox.js";
 import { registerWorkComponent } from "./components/work.js";
+import { registerWatchHistoryComponent } from "./components/watch-history.js";
 
 (function () {
   const app = () => {
@@ -13,13 +14,23 @@ import { registerWorkComponent } from "./components/work.js";
     registerWatchedCheckboxComponent();
     registerMediaIconComponent();
     registerSWDBComponent();
+    registerWatchHistoryComponent();
 
     var db =  document.getElementById('db');
+    var watch_history =  document.getElementById('watch_history');
     var results =  document.getElementById('results');
 
     try {
       db.initialize().then(() => {
         db.query("select * from media order by random() limit 9", results);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      watch_history.initialize().then(() =>{
+        console.log("in here");
       });
     } catch (e) {
       console.log(e);
