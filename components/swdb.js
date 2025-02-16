@@ -2,6 +2,7 @@ import { SWDB } from "../modules/briqualon.js";
 
 class SWDBComponent extends HTMLElement {
   swdb;
+  total = 0;
   constructor(){
     super();
     this.ready = false;
@@ -17,6 +18,11 @@ class SWDBComponent extends HTMLElement {
     return new Promise((resolve) => {
       this.swdb.load_db().then(function(){
         this.ready = true;
+        this.total = this.swdb.db.exec({
+          sql: "select count(*) from media",
+          returnValue: 'resultRows',
+        });
+        console.log(this.total);
         this.update();
         resolve();
       }.bind(this));
@@ -28,6 +34,7 @@ class SWDBComponent extends HTMLElement {
     const i = document.createElement('span');
     i.setAttribute('ready', this.ready);
     i.innerHTML = "DB ready: " + (this.ready);
+    i.innerHTML += "<br> Media count: " + (this.total);
     d.replaceChildren(i);
   }
 
