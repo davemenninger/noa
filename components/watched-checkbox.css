@@ -1,0 +1,10 @@
+x-watched-checkbox {
+  border: 2px dotted var(--color-orange);
+  display: inline-block;
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+x-watched-checkbox input[type=checkbox]:checked {
+  border: 2px solid var(--color-orange);
+}

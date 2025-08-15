@@ -1,0 +1,16 @@
+x-media-icon {
+  background: var(--color-white);
+  border-radius: 9px;
+  border: 1px solid green;
+  display: inline-block;
+  margin: 9px;
+  padding: 9px;
+}
+
+x-media-icon div.SS{
+  color: var(--color-light-orange);
+}
+
+x-media-icon div.F{
+  color: var(--color-orange);
+}
